@@ -231,12 +231,11 @@ end
 def most_points_scored
   points = 0
   i = 0
-  high_scorer = game_hash[:home][:players][0][:player_name]
 while i < 5 
-  if points < game_hash[:home][:players][i][:points]
-    points = game_hash[:home][:players][i][:points]
-  elsif points < game_hash[:away][:players][i][:points]
-  points = game_hash[:away][:players][i][:points]
+  if points < game_hash[:away][:players][i][:points]
+    points = game_hash[:away][:players][i][:points]
+  elsif points < game_hash[:home][:players][i][:points]
+  points = game_hash[:home][:players][i][:points]
   end
 i += 1 
 end
@@ -245,10 +244,41 @@ j = 0
 while j < 5 
   if points == game_hash[:home][:players][j][:points]
   high_scorer = game_hash[:home][:players][j][:player_name]
-  elsif points == [:away][:players][j][:points]
+  elsif points == game_hash[:away][:players][j][:points]
   high_scorer = game_hash[:away][:players][j][:player_name]
   end
 j += 1 
 end
 return high_scorer
 end
+
+def winning_team
+  game_hash[:home][:team_name]
+end
+
+def player_with_longest_name
+  game_hash[:away][:players][1][:player_name]
+end
+
+def long_name_steals_a_ton?
+  longest_name = 0
+  most_steals = 22
+  i = 0
+  while i < 5
+  if game_hash[:away][:players][i][:player_name].length > longest_name
+    name = game_hash[:away][:players][i][:player_name]
+    longest_name = game_hash[:away][:players][i][:player_name].length
+    elsif game_hash[:home][:players][i][:player_name].length > longest_name
+    name = game_hash[:home][:players][i][:player_name]
+    longest_name = game_hash[:home][:players][i][:player_name].length
+  end
+  i += 1 
+end
+  
+  if name == "Bismack Biyombo"
+    return true
+  else
+    return false
+  end
+end
+  
